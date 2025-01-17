@@ -1,6 +1,7 @@
 from Crypto.Cipher import AES
 from base64 import b64decode
 
+
 def input() -> bytes:
     with open("data/1-7.txt") as file:
         return b64decode("".join([line.strip() for line in file]))

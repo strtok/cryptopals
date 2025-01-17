@@ -1,5 +1,6 @@
 from cryptopals.pkcs7 import pad
 
+
 def test_pad():
     assert pad(b"", 3) == b"\x03\x03\x03"
     assert pad(b"f", 3) == b"f\x02\x02"

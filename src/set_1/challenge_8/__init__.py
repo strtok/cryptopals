@@ -1,6 +1,7 @@
 from collections import Counter
 from itertools import batched
 
+
 def input() -> list[str]:
     with open("data/1-8.txt") as file:
         return [line for line in file]
