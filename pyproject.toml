@@ -1,0 +1,18 @@
+[project]
+name = "cryptopals"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [{ name = "Erik Bremen", email = "strtok@gmail.com" }]
+requires-python = ">=3.13"
+dependencies = ["pytest>=8.3.4"]
+
+[project.scripts]
+cryptopals = "cryptopals:main"
+set_1_challenge_3 = "set_1.challenge_3:main"
+set_1_challenge_4 = "set_1.challenge_4:main"
+set_1_challenge_6 = "set_1.challenge_6:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
