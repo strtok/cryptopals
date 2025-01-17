@@ -39,13 +39,13 @@ def aes_cbc_decrypt(iv: bytes, key: bytes, ctext: bytes) -> bytes:
 
 def aes_oracle(ptext: bytes):
     key = aes_key()
-    iv = aes_key()
     ptext = pad(token_bytes(randbelow(5) + 5) + ptext + token_bytes(randbelow(5) + 5), 0x10)
-    cipher = (
-        AES.new(key, AES.MODE_ECB)
-        if randbelow(2) == 1
-        else AES.new(key, AES.MODE_CBC, iv=iv)
-    )
+
+    if randbelow(2) == 1:
+        cipher = AES.new(key, AES.MODE_ECB)
+    else:
+        cipher = AES.new(key, AES.MODE_CBC, iv=aes_key())
+
     return cipher.encrypt(ptext)
 
 
