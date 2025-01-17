@@ -8,11 +8,12 @@ requires-python = ">=3.13"
 dependencies = ["pycryptodome>=3.21.0", "pytest>=8.3.4", "ruff>=0.9.2"]
 
 [project.scripts]
-set_1_challenge_3 = "set_1.challenge_3:main"
-set_1_challenge_4 = "set_1.challenge_4:main"
-set_1_challenge_6 = "set_1.challenge_6:main"
-set_1_challenge_7 = "set_1.challenge_7:main"
-set_1_challenge_8 = "set_1.challenge_8:main"
+challenge_3 = "challenge_3:main"
+challenge_4 = "challenge_4:main"
+challenge_6 = "challenge_6:main"
+challenge_7 = "challenge_7:main"
+challenge_8 = "challenge_8:main"
+challenge_11 = "challenge_11:main"
 
 [build-system]
 requires = ["hatchling"]
