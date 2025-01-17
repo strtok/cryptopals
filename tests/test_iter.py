@@ -8,4 +8,4 @@ def test_blocks():
 
 def test_transpose():
     assert list(transpose(b"foobar", 3)) == [b"fb", b"oa", b"or"]
-    assert list(transpose(b"foobarba", 3)) == [b"fb", b"oa", b'or']
+    assert list(transpose(b"foobarba", 3)) == [b"fb", b"oa", b"or"]
