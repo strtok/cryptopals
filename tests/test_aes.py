@@ -1,5 +1,5 @@
 from base64 import b64encode
-from cryptopals.aes import aes_cbc_encrypt, aes_cbc_decrypt
+from cryptopals.aes import aes_cbc_encrypt, aes_cbc_decrypt, aes_oracle
 from cryptopals.pkcs7 import pad
 from itertools import repeat
 from pytest import raises

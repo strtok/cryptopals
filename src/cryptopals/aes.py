@@ -1,3 +1,5 @@
+from secrets import token_bytes, randbelow
+
 from Crypto.Cipher import AES
 from .iter import blocks
 from .pkcs7 import pad
@@ -33,3 +35,19 @@ def aes_cbc_decrypt(iv: bytes, key: bytes, ctext: bytes) -> bytes:
         iv = block
 
     return ptext
+
+
+def aes_oracle(ptext: bytes):
+    key = aes_key()
+    iv = aes_key()
+    ptext = pad(token_bytes(randbelow(5) + 5) + ptext + token_bytes(randbelow(5) + 5), 0x10)
+    cipher = (
+        AES.new(key, AES.MODE_ECB)
+        if randbelow(2) == 1
+        else AES.new(key, AES.MODE_CBC, iv=iv)
+    )
+    return cipher.encrypt(ptext)
+
+
+def aes_key() -> bytes:
+    return token_bytes(16)
