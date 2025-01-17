@@ -1,5 +1,6 @@
 from base64 import b64encode
-from cryptopals.aes import aes_cbc_encrypt
+from cryptopals.aes import aes_cbc_encrypt, aes_cbc_decrypt
+from cryptopals.pkcs7 import pad
 from itertools import repeat
 from pytest import raises
 
@@ -15,7 +16,6 @@ def test_cbc_encrypt():
     iv = bytes(repeat(0, 16))
     ptext = b"puppies like waffles"
     key = b"YELLOW SUBMARINE"
-    assert (
-        b64encode(aes_cbc_encrypt(iv, key, ptext))
-        == b"AwGVgw0q5T1LVG0CR87L4gpjVQd3UMEgTqqdHT0YKhI="
-    )
+    ctext = aes_cbc_encrypt(iv, key, ptext)
+    assert b64encode(ctext) == b"AwGVgw0q5T1LVG0CR87L4gpjVQd3UMEgTqqdHT0YKhI="
+    assert aes_cbc_decrypt(iv, key, ctext) == pad(b"puppies like waffles", 0x10)
