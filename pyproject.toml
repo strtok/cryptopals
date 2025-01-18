@@ -14,6 +14,7 @@ challenge_6 = "challenge_6:main"
 challenge_7 = "challenge_7:main"
 challenge_8 = "challenge_8:main"
 challenge_11 = "challenge_11:main"
+challenge_12 = "challenge_12:main"
 
 [build-system]
 requires = ["hatchling"]
