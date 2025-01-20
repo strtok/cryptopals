@@ -1,6 +1,8 @@
 from Crypto.Cipher import AES
 from base64 import b64decode
+from cryptopals.text import print_hexdump
 from itertools import repeat
+from math import ceil
 from cryptopals.pkcs7 import pad
 from secrets import token_bytes
 
@@ -26,7 +28,26 @@ def detect_block_size(oracle: AESOracle) -> int:
             return diff
     return 0
 
+def decrypt_suffix(oracle: AESOracle, block_size: int) -> bytes:
+    slen = len(oracle.encrypt(b""))
+    plen = ceil(slen / block_size) * 16
+    solution = bytearray()
+    for i in range(1, slen):
+        prefix = bytes(repeat(0x41, plen - i))
+        ctext = oracle.encrypt(prefix)
+        target_block = ctext[plen - 16:plen]
+        for j in range(0, 256):
+            prefix = bytes(repeat(0x41, plen - i)) + bytes(solution) + bytes([j])
+            ctext = oracle.encrypt(prefix)
+            if ctext[plen - 16:plen] == target_block:
+                solution += bytes([j])
+                break
+    return bytes(solution)
+
 def main() -> None:
     oracle = AESOracle()
     block_size = detect_block_size(oracle)
     print(f"block_size={block_size}")
+    ptext = decrypt_suffix(oracle, block_size)
+    print("=== solution ===")
+    print_hexdump(ptext)

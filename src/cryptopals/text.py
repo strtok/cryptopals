@@ -70,3 +70,10 @@ def score(ptext: bytes) -> float:
 def hamming_distance(a: bytes, b: bytes) -> int:
     distance = abs(len(a) - len(b)) * 8
     return sum(bin(a ^ b).count("1") for a, b in zip(a, b)) + distance
+
+def print_hexdump(b: bytes) -> None:
+    for offset in range(0, len(b), 16):
+        chunk = b[offset:offset + 16]
+        hex_part = " ".join(f"{byte:02x}" for byte in chunk)
+        ascii_part = "".join(chr(byte) if 32 <= byte <= 126 else '.' for byte in chunk)
+        print(f"{offset:08x}  {hex_part:<48}  |{ascii_part}|")
