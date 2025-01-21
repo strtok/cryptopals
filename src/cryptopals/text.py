@@ -86,11 +86,16 @@ def obj_encode(obj):
         result += f"{k}={v}&"
     return result[:-1]
 
+
+def obj_decode(text):
+    obj = dict()
+    for item in text.split("&"):
+        item = item.split("=")
+        obj[item[0]] = item[1]
+    return obj
+
+
 def profile_for(email: str) -> str:
-    email = "".join(c for c in email if c not in {'&', '='})
-    profile = {
-        "email": email,
-        "uid": 10,
-        "role": "user"
-    }
+    email = "".join(c for c in email if c not in {"&", "="})
+    profile = {"email": email, "uid": "10", "role": "user"}
     return obj_encode(profile)
