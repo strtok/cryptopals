@@ -78,3 +78,19 @@ def print_hexdump(b: bytes) -> None:
         hex_part = " ".join(f"{byte:02x}" for byte in chunk)
         ascii_part = "".join(chr(byte) if 32 <= byte <= 126 else "." for byte in chunk)
         print(f"{offset:08x}  {hex_part:<48}  |{ascii_part}|")
+
+
+def obj_encode(obj):
+    result = ""
+    for k, v in obj.items():
+        result += f"{k}={v}&"
+    return result[:-1]
+
+def profile_for(email: str) -> str:
+    email = "".join(c for c in email if c not in {'&', '='})
+    profile = {
+        "email": email,
+        "uid": 10,
+        "role": "user"
+    }
+    return obj_encode(profile)
