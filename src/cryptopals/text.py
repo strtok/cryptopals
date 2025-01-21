@@ -87,7 +87,7 @@ def obj_encode(obj):
     return result[:-1]
 
 
-def obj_decode(text):
+def obj_decode(text: str):
     obj = dict()
     for item in text.split("&"):
         item = item.split("=")
