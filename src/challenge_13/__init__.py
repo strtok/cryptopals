@@ -1,7 +1,8 @@
 from Crypto.Cipher import AES
-from cryptopals.text import profile_for, obj_decode, print_hexdump
+from cryptopals.text import profile_for, obj_decode
 from cryptopals.pkcs7 import pad, unpad
 from secrets import token_bytes
+
 
 class AESOracle:
     def __init__(self):
@@ -9,14 +10,14 @@ class AESOracle:
 
     def make_profile(self, email: str) -> bytes:
         ptext = profile_for(email)
-        ptext = pad(bytes(ptext, 'utf-8'), 16)
+        ptext = pad(bytes(ptext, "utf-8"), 16)
         print(ptext)
         return self.cipher.encrypt(ptext)
 
     def read_profile(self, ctext: bytes):
         ptext = self.cipher.decrypt(ctext)
         ptext = unpad(ptext, 16)
-        return obj_decode(str(ptext, 'utf-8'))
+        return obj_decode(str(ptext, "utf-8"))
 
 
 def main() -> None:

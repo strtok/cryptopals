@@ -11,6 +11,7 @@ def input() -> bytes:
 def main() -> None:
     ctext = input()
     keysize = find_keysize(ctext, range(2, 42))
+    print(f"keysize={keysize}")
     key = find_key(ctext, keysize)
     print(f"key={key}")
     ptext = xor(ctext, cycle(key))

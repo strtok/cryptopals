@@ -10,6 +10,7 @@ def test_pad():
     assert pad(b"fooba", 3) == b"fooba\x01"
     assert pad(b"foobar", 3) == b"foobar\x03\x03\x03"
 
+
 def test_unpad():
     assert unpad(pad(b"", 3), 3) == b""
     assert unpad(pad(b"f", 3), 3) == b"f"
@@ -17,4 +18,4 @@ def test_unpad():
     assert unpad(pad(b"foo", 3), 3) == b"foo"
     assert unpad(pad(b"foob", 3), 3) == b"foob"
     assert unpad(pad(b"fooba", 3), 3) == b"fooba"
-    assert unpad(pad(b"foobar", 3),3 ) == b"foobar"
+    assert unpad(pad(b"foobar", 3), 3) == b"foobar"
